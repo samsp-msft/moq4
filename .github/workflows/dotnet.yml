@@ -25,8 +25,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-- name: Restore
-      run: dotnet restore
+    - name: Restore
+      run: dotnet restore ${{ env.SOLUTION }}
 
     - name: Build
       run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }}
