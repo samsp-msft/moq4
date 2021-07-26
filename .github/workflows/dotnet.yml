@@ -1,0 +1,39 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  SOLUTION: "Moq.sln"
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.8.0
+      with:
+        dotnet-version: 5.0.x
+
+- name: Restore
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }}
+
+    # Run the tests, ideally should stop here if a fail and also publish results as artifacts
+    - name: Test
+      run: dotnet test ${{ env.SOLUTION }}
+
+    - name: Pack
+      run: dotnet pack --configuration Release -o finalpackage --no-build ${{ env.SOLUTION }}
