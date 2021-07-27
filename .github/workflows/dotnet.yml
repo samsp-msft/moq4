@@ -28,7 +28,6 @@ jobs:
     - name: Restore
       run: dotnet restore ${{ env.SOLUTION }}
       
-
     - name: Build
       run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }}
 
@@ -36,5 +35,5 @@ jobs:
     - name: Test
       run: dotnet test ${{ env.SOLUTION }}
 
-    - name: Pack
+    - name: Package
       run: dotnet pack --configuration Release -o finalpackage --no-build ${{ env.SOLUTION }}
