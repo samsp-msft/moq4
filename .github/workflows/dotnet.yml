@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   SOLUTION: "Moq.sln"
@@ -27,7 +27,7 @@ jobs:
 
     - name: Restore
       run: dotnet restore ${{ env.SOLUTION }}
-      
+
 
     - name: Build
       run: dotnet build --configuration Release --no-restore ${{ env.SOLUTION }}
